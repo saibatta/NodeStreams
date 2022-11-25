@@ -1,7 +1,11 @@
 console.clear();
 const fs = require("fs");
 
-const writeStream = fs.createWriteStream("./import.csv");
+const writeStream = fs.createWriteStream("./data/import.csv", {
+  flags: "a", // append the new content where the cursor left previously
+  encodeing: "encoding",
+  mode: 0744,
+});
 
 const write = async () => {
   for (let i = 0; i < 100; i++) {
@@ -11,7 +15,7 @@ const write = async () => {
   }
 };
 const read = async () => {
-  const readStream = fs.createReadStream("./import.csv", {
+  const readStream = fs.createReadStream("./data/import.csv", {
     highWaterMark: 100,
   });
   readStream.on("data", (buffer) => {
@@ -26,4 +30,6 @@ const main = async () => {
   await read();
 };
 
-main();
+// main();
+
+
